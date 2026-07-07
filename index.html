@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BigFont Display Support</title>
+  <meta name="description" content="Support, quick-start help, and privacy information for BigFont Display.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #062a4f;
+      --panel: #102235;
+      --panel-soft: #172e42;
+      --text: #f7fbff;
+      --muted: #b9c7d4;
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #00f0f4;
+      --accent-strong: #2bffea;
+      --shadow: rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 0%, #0a3c6d 0, var(--bg) 34%, #04192f 100%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 26px 0 18px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .mark {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #04162a;
+      color: var(--accent);
+      box-shadow: 0 12px 28px var(--shadow);
+      font-size: 1.55rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+      gap: 34px;
+      align-items: center;
+      padding: 62px 0 48px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 24px 70px var(--shadow);
+    }
+
+    .phone {
+      aspect-ratio: 9 / 16;
+      min-height: 440px;
+      border-radius: 34px;
+      border: 8px solid #0b1724;
+      background: #052c54;
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14), 0 28px 70px var(--shadow);
+    }
+
+    .phone span {
+      color: var(--accent);
+      font-size: clamp(4rem, 10vw, 7.6rem);
+      font-weight: 900;
+      line-height: 0.9;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font-size: clamp(1.65rem, 3vw, 2.4rem);
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 100%;
+      background: rgba(16, 34, 53, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.18);
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    ol,
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+
+    .support-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #001a2e;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .button:hover {
+      text-decoration: none;
+      background: var(--accent-strong);
+    }
+
+    footer {
+      padding: 34px 0 42px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100% - 28px, 1080px);
+      }
+
+      nav,
+      .support-panel {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 34px;
+      }
+
+      .hero-card {
+        padding: 16px;
+      }
+
+      .phone {
+        min-height: 360px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="BigFont Display home">
+          <span class="mark" aria-hidden="true">Bf</span>
+          <span>BigFont Display</span>
+        </a>
+        <div class="nav-links">
+          <a href="#quick-start">Quick Start</a>
+          <a href="#faq">FAQ</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <div>
+        <h1>Big text. Clear message.</h1>
+        <p>BigFont Display turns your iPhone or iPad into a simple full-screen message display for quiet rooms, noisy places, pickup signs, events, classrooms, travel, and accessibility moments.</p>
+      </div>
+      <div class="hero-card" aria-hidden="true">
+        <div class="phone">
+          <span>Hello!</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="quick-start">
+      <div class="wrap">
+        <h2 class="section-title">Quick Start</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>1. Type</h3>
+            <p>Open BigFont Display and double-tap the screen to edit your message.</p>
+          </article>
+          <article class="card">
+            <h3>2. Show</h3>
+            <p>Tap once to show or hide controls, then hold up your iPhone or iPad.</p>
+          </article>
+          <article class="card">
+            <h3>3. Adjust</h3>
+            <p>Change size, color, font, alignment, pages, translations, and lock controls from the menu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">Features</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>Message Display</h3>
+            <p>Show one large message in a clean full-screen view.</p>
+          </article>
+          <article class="card">
+            <h3>Pages</h3>
+            <p>Split longer messages into pages and move through them clearly.</p>
+          </article>
+          <article class="card">
+            <h3>Translation Unlock</h3>
+            <p>Use the optional one-time purchase to display messages in multiple languages.</p>
+          </article>
+          <article class="card">
+            <h3>Lock Controls</h3>
+            <p>Lock the controls before handing over your device or holding it up in public.</p>
+          </article>
+          <article class="card">
+            <h3>Font and Color</h3>
+            <p>Choose the look that reads best for your message and setting.</p>
+          </article>
+          <article class="card">
+            <h3>iPhone and iPad</h3>
+            <p>Use a pocket-sized sign on iPhone or a larger display on iPad.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2 class="section-title">FAQ</h2>
+        <div class="grid">
+          <article class="card wide">
+            <h3>How do I edit the message?</h3>
+            <p>Double-tap the display to edit. Tap once to show or hide controls.</p>
+          </article>
+          <article class="card">
+            <h3>Is Translation Unlock a subscription?</h3>
+            <p>No. Translation Unlock is planned as a one-time in-app purchase.</p>
+          </article>
+          <article class="card">
+            <h3>What if I forget my app lock PIN?</h3>
+            <p>The reset path is deleting and reinstalling the app. Offloading the app may preserve local data and may not reset the PIN.</p>
+          </article>
+          <article class="card wide">
+            <h3>Does BigFont Display require an account?</h3>
+            <p>No. The app does not require sign-in or an account.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="wrap">
+        <h2 class="section-title">Privacy</h2>
+        <div class="support-panel">
+          <div>
+            <h3>Simple by design</h3>
+            <p>BigFont Display does not require an account and is designed around local message display. Purchases are handled by Apple through the App Store.</p>
+          </div>
+          <a class="button" href="#contact">Get Support</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <h2 class="section-title">Contact</h2>
+        <div class="support-panel">
+          <div>
+            <h3>Need help?</h3>
+            <p>Email support with your device model, iOS or iPadOS version, and a short description of the issue.</p>
+          </div>
+          <a class="button" href="mailto:slowpokezzz@gmail.com?subject=BigFont%20Display%20Support">Email Support</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Richard Montoya. BigFont Display is an independent app for iPhone and iPad.</p>
+    </div>
+  </footer>
+</body>
+</html>
